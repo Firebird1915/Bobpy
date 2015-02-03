@@ -3,7 +3,6 @@
     This sample program shows how to control a motor using a joystick. In the
     operator control part of the program, the joystick is read and the value
     is written to the motor.
-
     Joystick analog values range from -1 to 1 and speed controller inputs also
     range from -1 to 1 making it easy to work together. The program also delays
     a short time in the loop to allow other threads to run. This is generally
@@ -20,17 +19,23 @@ class MyRobot(wpilib.SampleRobot):
     def robotInit(self):
         '''Robot initialization function'''
         
-        self.motor1 = wpilib.CANTalon(1)        # initialize the motor as a Talon on channel 1
-        self.motor2 = wpilib.CANTalon(2)    
+        self.motor1 = wpilib.CANTalon(2)        # initialize the motor as a Talon on channel 1
+        self.motor2 = wpilib.CANTalon(3)   
+        
+        self.motor3 = wpilib.CANTalon(4).reverseOutput(True)    #reverses the motor set so that it goes into the right direction
+        self.motor4 = wpilib.CANTalon(1).reverseOutput(True)
+        
         self.stick = wpilib.Joystick(0)     # initialize the joystick on port 0
+        self.stick2 = wpilib.Joystick(1)    # initialize the joystick on port 1
+
         self.switch = wpilib.DigitalInput(9)
         self.piston1 = wpilib.DoubleSolenoid(0,1)
         self.encoder1 = wpilib.Encoder(0,1)
 
 
         if self.isReal():
-        	self.compressor = wpilib.Compressor()
-        	self.compressor.start() 
+           self.compressor = wpilib.Compressor()
+           self.compressor.start() 
 
     def autonomous(self):
         '''Called when autonomous mode is enabled.'''
@@ -45,18 +50,24 @@ class MyRobot(wpilib.SampleRobot):
             # Set the motor's output.
             # This takes a number from -1 (100% speed in reverse) to
             # +1 (100% speed going forward)
-             
+            
+            self.motor2.setFeedbackDevice()
+
             #Enables the dashboard to show the boolean of the object
             wpilib.SmartDashboard.putBoolean('Limit Switch', self.switch.get())
             wpilib.SmartDashboard.putBoolean('Compressor', self.compressor.enabled())
             wpilib.SmartDashboard.putBoolean('TRIGGER', self.stick.getTrigger())
-            wpilib.SmartDashboard.putNumber('Encoder Distance', self.encoder1.getDirection())
 
-            self.motor1.set(self.stick.getY())
-            self.motor2.set(self.stick.getX())
+            #Still have no idea how this worked
+            wpilib.SmartDashboard.putNumber('Encoder Distance', self.motor2.getEncPosition())
 
-            if self.switch.get():
-                self.motor1.set(1)
+            #reacts to joystick0
+            self.motor1.set(self.stick1.getY())
+            self.motor2.set(self.stick1.getY())
+
+            #reacts to joystick1
+            self.motor3.set(self.stick2.getY())
+            self.motor4.set(self.stick2.getY())
 
             if self.stick.getTrigger():
                 self.piston1.set(1)
