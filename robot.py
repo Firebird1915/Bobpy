@@ -11,7 +11,7 @@
 '''
 import wpilib
 
-class MyRobot(wpilib.SampleRobot):
+class Bob(wpilib.SampleRobot):
     
     #: update every 0.005 seconds/5 milliseconds (200Hz)
     kUpdatePeriod = 0.005
@@ -79,4 +79,4 @@ class MyRobot(wpilib.SampleRobot):
 
 
 if __name__ == "__main__":
-    wpilib.run(MyRobot)
+    wpilib.run(Bob)
