@@ -1,5 +1,4 @@
 import wpilib
-
 from wpilib import SmartDashboard
 from wpilib.buttons import JoystickButton
 

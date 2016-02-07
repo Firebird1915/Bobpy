@@ -7,6 +7,7 @@ import logging
 from oi import OI
 
 from subsystems.drivetrain import DriveTrain
+from subsystems.camera import Camera
 
 class Bob(wpilib.IterativeRobot):
 
