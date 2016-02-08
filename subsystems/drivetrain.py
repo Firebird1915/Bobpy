@@ -14,10 +14,12 @@ class DriveTrain(Subsystem):
         
 
         self.l_motor1 = wpilib.CANTalon(1)
-        self.l_motor2 = wpilib.CANTalon(1)
+        self.l_motor2 = wpilib.CANTalon(2)
+        self.l_motor3 = wpilib.CANTalon(3)
 
-        self.r_motor1 = wpilib.CANTalon(3)
-        self.r_motor2 = wpilib.CANTalon(4)
+        self.r_motor1 = wpilib.CANTalon(4)
+        self.r_motor2 = wpilib.CANTalon(5)
+        self.r_motor3 = wpilib.CANTalon(6)
 
 
         self.ls_motor = self.l_motor1,self.l_motor2
@@ -31,6 +33,8 @@ class DriveTrain(Subsystem):
                                        self.l_motor2,
                                        self.r_motor1,
                                        self.r_motor2) # Alternatively can use two stick method later on
+
+        self.drive2= wpilib.RobotDrive(self.l_motor3,self.r_motor3)
 
 
         self.motor_encoder = wpilib.Encoder(0,1) # position of these two motors
@@ -48,10 +52,11 @@ class DriveTrain(Subsystem):
         '''Tank style driving
         '''
         self.drive.tankDrive(left,right)
-
+        self.drive2.tankDrive(left,right)
     def driveJoystick(self, joy):
         ''' using a controller to drive tank style '''
         self.drive.tankDrive(-joy.getRawAxis(1), -joy.getRawAxis(5))
+        self.drive2.tankDrive(-joy.getRawAxis(1),-joy.getRawAxis(5))
 
     def reset(self):
         ''' reset the encoders '''
