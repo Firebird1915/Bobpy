@@ -31,12 +31,15 @@ class Bob(wpilib.IterativeRobot):
 
 	def autonomousPeriodic(self):
 		"""This function is called periodically during autonomous."""
+		timer = wpilib.timer()
+		timer.start()
 
-		# if self.auto_loop_counter < 100:
-		#     self.robot_drive.drive(-0.5, 0) #drive forward
-		#     self.auto_loop_counter += 1
-		# else:
-		#     self.robot_drive.drive(0,0)
+		if self.auto_loop_counter < 100:
+		    self.drive.drive(-0.5, 0) #drive forward
+		    self.drive2.drive(-0.5,0)
+		    self.auto_loop_counter += 1
+		else:
+		    self.robot_drive.drive(0,0)
 		
 
 	def teleopPeriodic(self):
