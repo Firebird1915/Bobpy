@@ -8,6 +8,7 @@ class OI:
 		self.joy = wpilib.Joystick(0)
 
 
+
 		#Buttons for controller
 
 	def getJoystick(self):

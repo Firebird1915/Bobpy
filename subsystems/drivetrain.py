@@ -5,7 +5,7 @@ from commands.tankdrive_with_joystick import TankDriveWithJoystick
 
 class DriveTrain(Subsystem):
     '''The DriveTrain system holds all the inital calls for the motors this includes 
-        encoders as well. If you need to mess with the motors here is the spot.
+        encoders as well. If you need to mess with the motors in the drive here is the spot.
     '''
 
     def __init__(self, robot):
@@ -17,13 +17,19 @@ class DriveTrain(Subsystem):
         self.l_motor2 = wpilib.CANTalon(2)
         self.l_motor3 = wpilib.CANTalon(3)
 
+        self.l_motor1.reverseOutput(True)
+        self.l_motor2.reverseOutput(True)
+        self.l_motor3.reverseOutput(True)
+
         self.r_motor1 = wpilib.CANTalon(4)
         self.r_motor2 = wpilib.CANTalon(5)
         self.r_motor3 = wpilib.CANTalon(6)
 
+        self.r_motor1.reverseOutput(True)
+        self.r_motor2.reverseOutput(True)
+        self.r_motor3.reverseOutput(True)
 
-        self.ls_motor = self.l_motor1,self.l_motor2
-        self.rs_motor = self.r_motor1,self.r_motor2
+
         
         #self.motor1 = wpilib.CANTalon(8) #initialize the motor as a Talon on channel 1
         #self.motor2 = wpilib.CANTalon(2)
@@ -53,10 +59,12 @@ class DriveTrain(Subsystem):
         '''
         self.drive.tankDrive(left,right)
         self.drive2.tankDrive(left,right)
+
     def driveJoystick(self, joy):
         ''' using a controller to drive tank style '''
-        self.drive.tankDrive(-joy.getRawAxis(1), -joy.getRawAxis(5))
-        self.drive2.tankDrive(-joy.getRawAxis(1),-joy.getRawAxis(5))
+        self.drive.tankDrive(joy.getRawAxis(1)/1.2, joy.getRawAxis(5)/1.2)
+        self.drive2.tankDrive(joy.getRawAxis(1)/1.2,joy.getRawAxis(5)/1.2)
+   
 
     def reset(self):
         ''' reset the encoders '''
