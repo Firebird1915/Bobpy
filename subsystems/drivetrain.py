@@ -29,8 +29,14 @@ class DriveTrain(Subsystem):
         self.r_motor2.reverseOutput(True)
         self.r_motor3.reverseOutput(True)
 
-
+        #Compressor starts from the drivetrain but this all might change
+        if self.isReal():
+            self.compressor = wpilib.Compressor()
+            self.compressor.start()
         
+        self.shift = wpilib.DoubleSolenoid(0,1)            
+
+        #Encoder talons from testbed
         #self.motor1 = wpilib.CANTalon(8) #initialize the motor as a Talon on channel 1
         #self.motor2 = wpilib.CANTalon(2)
 

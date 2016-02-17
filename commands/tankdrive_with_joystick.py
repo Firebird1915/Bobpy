@@ -2,7 +2,7 @@ from wpilib.command import Command
 
 class TankDriveWithJoystick(Command):
     '''
-        Have the robot drive tank style using the PS3 Joystick until interrupted.
+        Have the robot drive tank style using an Xbox controller until interrupted.
     '''
     
     def __init__(self, robot):
@@ -21,7 +21,7 @@ class TankDriveWithJoystick(Command):
     def isFinished(self):
         '''Make this return true when this Command no longer needs to run execute()'''
         return False # Runs until interrupted
-    
+     
     def end(self):
         '''Called once after isFinished returns true'''
         self.robot.drivetrain.driveManual(0, 0)
