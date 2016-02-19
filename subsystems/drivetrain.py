@@ -34,7 +34,8 @@ class DriveTrain(Subsystem):
             self.compressor = wpilib.Compressor()
             self.compressor.start()
         
-        self.shift = wpilib.DoubleSolenoid(0,1)            
+        self.switcher = wpilib.DoubleSolenoid(0,1)
+        self.shifter = False            
 
         #Encoder talons from testbed
         #self.motor1 = wpilib.CANTalon(8) #initialize the motor as a Talon on channel 1
@@ -70,7 +71,17 @@ class DriveTrain(Subsystem):
         ''' using a controller to drive tank style '''
         self.drive.tankDrive(joy.getRawAxis(1)/1.2, joy.getRawAxis(5)/1.2)
         self.drive2.tankDrive(joy.getRawAxis(1)/1.2,joy.getRawAxis(5)/1.2)
-   
+    
+    def shiftFast(self):
+        self.switcher.set(2)
+        self.shifter = True
+
+    def shiftReturn(self):
+        self.switcher.set(0)
+        self.shifter = False
+
+    def is_shifted(self):
+        return self.shifter
 
     def reset(self):
         ''' reset the encoders '''

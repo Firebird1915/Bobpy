@@ -1,7 +1,8 @@
 import wpilib
 from wpilib import SmartDashboard
 from wpilib.buttons import JoystickButton
-
+from subsystems.drivetrain import DriveTrain
+from commands.speed_toggle import SpeedToggle
 class OI:
 
 	def __init__(self, robot):
@@ -16,3 +17,4 @@ class OI:
 		#self.r_trig.toggleWhenPressed()
 	def getJoystick(self):
 		return self.joy
+

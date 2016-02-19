@@ -15,7 +15,10 @@ class SpeedToggle(Command):
 
 	def execute(self):
 		'''Called repeatedly when the command is scheduled to rub'''
-		pass
+		if self.drivetrain.is_shifted():
+			self.drivetrain.shiftFast()
+		else:
+			self.drivetrain.shiftReturn()
 
 	def isFinished(self):
 		return False
