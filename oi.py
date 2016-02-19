@@ -11,7 +11,7 @@ class OI:
 
 
 		#Buttons for controller
-		self.r_trig = JoystickButton(self.joy, 8) #I think 
+		self.r_trig = JoystickButton(self.joy, 6) #I think 
 
 		#bind buttons to commands
 		self.r_trig.toggleWhenPressed(SpeedToggle(DriveTrain))

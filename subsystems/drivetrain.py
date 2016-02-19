@@ -4,15 +4,16 @@ from networktables import NetworkTable
 from commands.tankdrive_with_joystick import TankDriveWithJoystick
 
 class DriveTrain(Subsystem):
-    '''The DriveTrain system holds all the inital calls for the motors this includes 
-        encoders as well. If you need to mess with the motors in the drive here is the spot.
+    '''
+        The DriveTrain system holds all the inital calls for the motors this includes 
+        encoders as well as the compressor and solenoid switch. If you need to mess with the motors in the drive here is the spot.
     '''
 
     def __init__(self, robot):
         super().__init__()
         self.robot = robot
         
-
+        # left gearbox Talons
         self.l_motor1 = wpilib.CANTalon(1)
         self.l_motor2 = wpilib.CANTalon(2)
         self.l_motor3 = wpilib.CANTalon(3)
@@ -21,6 +22,7 @@ class DriveTrain(Subsystem):
         self.l_motor2.reverseOutput(True)
         self.l_motor3.reverseOutput(True)
 
+        #right gearbox Talon
         self.r_motor1 = wpilib.CANTalon(4)
         self.r_motor2 = wpilib.CANTalon(5)
         self.r_motor3 = wpilib.CANTalon(6)
@@ -41,17 +43,19 @@ class DriveTrain(Subsystem):
         #self.motor1 = wpilib.CANTalon(8) #initialize the motor as a Talon on channel 1
         #self.motor2 = wpilib.CANTalon(2)
 
-        
+        '''This is set to the first two sets of gearbox motors for each side'''
         self.drive = wpilib.RobotDrive(self.l_motor1, # Tells the robot to call the tank drive method
                                        self.l_motor2,
                                        self.r_motor1,
-                                       self.r_motor2) # Alternatively can use two stick method later on
+                                       self.r_motor2)
 
+        '''This is for the two 3rd motors of each gearbox'''
         self.drive2= wpilib.RobotDrive(self.l_motor3,self.r_motor3)
 
 
         self.motor_encoder = wpilib.Encoder(0,1) # position of these two motors
-        #block for eventual test simulation (see docs)
+
+        #block for eventual test simulation
         self.sd = wpilib.SmartDashboard
 
     def initDefaultCommand(self):
@@ -70,16 +74,19 @@ class DriveTrain(Subsystem):
     def driveJoystick(self, joy):
         ''' using a controller to drive tank style '''
         self.drive.tankDrive(joy.getRawAxis(1)/1.2, joy.getRawAxis(5)/1.2)
-        self.drive2.tankDrive(joy.getRawAxis(1)/1.2,joy.getRawAxis(5)/1.2)
+        self.drive2.tankDrive(joy.getRawAxis(1)/1.2,joy.getRawAxis(5)/1.2) #these have to be the same as self.drive or you might break the gearboxes
     
+    #turbo mode
     def shiftFast(self):
         self.switcher.set(2)
         self.shifter = True
 
+    #cruise mode
     def shiftReturn(self):
         self.switcher.set(0)
         self.shifter = False
 
+    #did we change speeds?
     def is_shifted(self):
         return self.shifter
 
