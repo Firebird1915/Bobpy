@@ -57,6 +57,7 @@ class Bob(wpilib.IterativeRobot):
     def log(self):
         self.drivetrain.log()
         self.sd.putNumber('someNumber', 1234)
+        self.sd.getBoolean('Right trigger?',self.r_trig.get())
 
 
 if __name__ == "__main__":

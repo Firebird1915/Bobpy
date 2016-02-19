@@ -30,7 +30,7 @@ class DriveTrain(Subsystem):
         self.r_motor3.reverseOutput(True)
 
         #Compressor starts from the drivetrain but this all might change
-        if self.isReal():
+        if self.robot.isReal():
             self.compressor = wpilib.Compressor()
             self.compressor.start()
         
@@ -90,4 +90,4 @@ class DriveTrain(Subsystem):
     def log(self):
         # self.sd.putDouble("Encoder Distance", self.motor1.getEncPosition())
         # self.sd.putDouble("Big Encoder", self.motor1.getEncPosition()*2)
-        pass
+        pass            

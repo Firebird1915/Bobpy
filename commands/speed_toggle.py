@@ -6,8 +6,8 @@ class SpeedToggle(Command):
 		super().__init__()
 
 		self.setInterruptible(False)
-		self.robot = robot
-		self.requires(self.robot.drivetrain)
+		self.drivetrain = drivetrain
+		self.requires(drivetrain)
 		self.setTimeout(1.0)
 
 	def initialize(self):

@@ -11,10 +11,10 @@ class OI:
 
 
 		#Buttons for controller
-		self.r_trig = JoystickButton(self.joy, 0) #working this out 
+		self.r_trig = JoystickButton(self.joy, 8) #I think 
 
 		#bind buttons to commands
-		#self.r_trig.toggleWhenPressed()
+		self.r_trig.toggleWhenPressed(SpeedToggle(DriveTrain))
 	def getJoystick(self):
 		return self.joy
 
