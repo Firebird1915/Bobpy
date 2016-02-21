@@ -1,6 +1,5 @@
 import wpilib
 from wpilib.command import Subsystem
-from networktables import NetworkTable
 from commands.tankdrive_with_joystick import TankDriveWithJoystick
 
 class DriveTrain(Subsystem):
@@ -31,13 +30,13 @@ class DriveTrain(Subsystem):
         self.r_motor2.reverseOutput(True)
         self.r_motor3.reverseOutput(True)
 
-        #Compressor starts from the drivetrain but this all might change
-        if self.robot.isReal():
-            self.compressor = wpilib.Compressor()
-            self.compressor.start()
+        # #Compressor starts from the drivetrain but this all might change
+        # if self.robot.isReal():
+        #     self.compressor = wpilib.Compressor()
+        #     self.compressor.start()
         
-        self.switcher = wpilib.DoubleSolenoid(0,1)
-        self.shifter = False            
+        # self.switcher = wpilib.DoubleSolenoid(0,1)
+        # self.shifter = False            
 
         #Encoder talons from testbed
         #self.motor1 = wpilib.CANTalon(8) #initialize the motor as a Talon on channel 1
@@ -76,19 +75,19 @@ class DriveTrain(Subsystem):
         self.drive.tankDrive(joy.getRawAxis(1)/1.2, joy.getRawAxis(5)/1.2)
         self.drive2.tankDrive(joy.getRawAxis(1)/1.2,joy.getRawAxis(5)/1.2) #these have to be the same as self.drive or you might break the gearboxes
     
-    #turbo mode
-    def shiftFast(self):
-        self.switcher.set(2)
-        self.shifter = True
+    # #turbo mode
+    # def shiftFast(self):
+    #     self.switcher.set(1)
+    #     self.shifter = True
 
-    #cruise mode
-    def shiftReturn(self):
-        self.switcher.set(0)
-        self.shifter = False
+    # #cruise mode
+    # def shiftReturn(self):
+    #     self.switcher.set(0)
+    #     self.shifter = False
 
-    #did we change speeds?
-    def is_shifted(self):
-        return self.shifter
+    # #did we change speeds?
+    # def is_shifted(self):
+    #     return self.shifter
 
     def reset(self):
         ''' reset the encoders '''
