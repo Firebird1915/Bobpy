@@ -2,7 +2,7 @@ import wpilib
 from wpilib import SmartDashboard
 from wpilib.buttons import JoystickButton
 from subsystems.drivetrain import DriveTrain
-from subsystems.pneumatics import Pneumatics
+from subsystems.pneumatics_comp import Pneumatics
 from commands.speed_toggle import SpeedToggle
 
 class OI:
