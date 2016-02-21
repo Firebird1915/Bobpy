@@ -1,24 +1,26 @@
 from wpilib.command import Command
-from subsystems.drivetrain import DriveTrain
+from subsystems.pneumatics_comp import Pneumatics
 
 class SpeedToggle(Command):
-	def __init__(self, drivetrain):
-		super().__init__()
+    def __init__(self, pneumatics):
+        super().__init__()
 
-		self.setInterruptible(False)
-		self.drivetrain = drivetrain
-		self.requires(drivetrain)
-		self.setTimeout(1.0)
+        self.setInterruptible(False)
+        self.pneumatics = pneumatics
+        self.requires(pneumatics)
+        self.setTimeout(1.0)
 
-	def initialize(self):
-		''' called before the command runs for the first time '''
+    def initialize(self):
+        ''' called before the command runs for the first time '''
 
-	def execute(self):
-		'''Called repeatedly when the command is scheduled to rub'''
-		if self.drivetrain.is_shifted():
-			self.drivetrain.shiftFast()
-		else:
-			self.drivetrain.shiftReturn()
+    def execute(self):
+        '''Called repeatedly when the command is scheduled to run'''
+        
+        #toggle speed modes based off of right trigger
+        if self.pneumatics.is_shifted():
+            self.pneumatics.shiftFast()
+        else:
+            self.pneumatics.shiftReturn()
 
-	def isFinished(self):
-		return False
+    def isFinished(self):
+        return self.isTimedOut()

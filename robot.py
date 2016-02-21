@@ -7,7 +7,6 @@ import logging
 from oi import OI
 
 from subsystems.drivetrain import DriveTrain
-from subsystems.camera import Camera
 
 class Bob(wpilib.IterativeRobot):
 
@@ -56,8 +55,8 @@ class Bob(wpilib.IterativeRobot):
 
     def log(self):
         self.drivetrain.log()
-        self.sd.putNumber('someNumber', 1234)
-        self.sd.getBoolean('Right trigger?',self.r_trig.get())
+        self.sd.putNumber('someNumber', 1234) #checks to see if dashboard is working
+        #self.sd.getBoolean('Right trigger?',self.r_trig.get())
 
 
 if __name__ == "__main__":
