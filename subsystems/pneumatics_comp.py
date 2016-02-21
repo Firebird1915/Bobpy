@@ -13,18 +13,18 @@ class Pneumatics(Subsystem):
             self.compressor = wpilib.Compressor()
             self.compressor.start()
         
-        self.switcher = wpilib.DoubleSolenoid(1,2)
+        self.switcher = wpilib.DoubleSolenoid(0,1)
         self.shifter = False   
 
     #turbo mode
-    def shiftFast(self):
+    def shiftReturn(self):
         self.switcher.set(1)
-        self.shifter = True
+        self.shifter = False
 
     #cruise mode
-    def shiftReturn(self):
-        self.switcher.set(0)
-        self.shifter = False
+    def shiftFast(self):
+        self.switcher.set(2)
+        self.shifter = True
 
     #did we change speeds?
     def is_shifted(self):

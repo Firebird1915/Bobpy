@@ -17,10 +17,12 @@ class SpeedToggle(Command):
         '''Called repeatedly when the command is scheduled to run'''
         
         #toggle speed modes based off of right trigger
-        if self.pneumatics_comp.is_shifted():
+        if not self.pneumatics_comp.shifter:
             self.pneumatics_comp.shiftFast()
+            return self.setTimeout(0)
         else:
             self.pneumatics_comp.shiftReturn()
+            return self.setTimeout(0)
 
     def isFinished(self):
         return self.isTimedOut()

@@ -25,7 +25,7 @@ class OI:
 		#self.btn4 = JoystickButton(self.joy_lift, 4)
 
 		#bind buttons on Xbox controller to commands
-		self.r_trig.toggleWhenPressed(SpeedToggle(Pneumatics))
+		self.r_trig.toggleWhenPressed(SpeedToggle(robot.pneumatics_comp))
 
 		#bind buttons on Joystick to commands
 		#self.btn3.whenPressed(PullIntake(Intake))
