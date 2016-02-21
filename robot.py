@@ -7,6 +7,7 @@ import logging
 from oi import OI
 
 from subsystems.drivetrain import DriveTrain
+from subsystems.pneumatics_comp import Pneumatics
 
 class Bob(wpilib.IterativeRobot):
 
@@ -19,6 +20,7 @@ class Bob(wpilib.IterativeRobot):
         should be used for any initialization code.
         """
         self.drivetrain = DriveTrain(self)
+        self.pneumatics_comp = Pneumatics(self)
         self.oi = OI(self)
         self.sd = NetworkTable.getTable("SmartDashboard")
 
