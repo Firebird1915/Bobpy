@@ -9,6 +9,7 @@ from oi import OI
 from subsystems.drivetrain import DriveTrain
 from subsystems.pneumatics_comp import Pneumatics
 from subsystems.intake import Intake
+from subsystems.lift import LiftMech
 
 class Bob(wpilib.IterativeRobot):
 
@@ -23,6 +24,7 @@ class Bob(wpilib.IterativeRobot):
         self.drivetrain = DriveTrain(self)
         self.pneumatics_comp = Pneumatics(self)
         self.intake = Intake(self)
+        self.lift = LiftMech(self)
         self.oi = OI(self)
         self.sd = NetworkTable.getTable("SmartDashboard")
 
@@ -59,6 +61,7 @@ class Bob(wpilib.IterativeRobot):
 
     def log(self):
         self.drivetrain.log()
+        self.lift.log()
         self.sd.putNumber('someNumber', 1234) #checks to see if dashboard is working
         #self.sd.getBoolean('Right trigger?',self.r_trig.get())
 

@@ -25,7 +25,7 @@ class DriveTrain(Subsystem):
         self.r_motor1 = wpilib.CANTalon(4)
         self.r_motor2 = wpilib.CANTalon(5)
         self.r_motor3 = wpilib.CANTalon(6)
-
+        
         self.r_motor1.reverseOutput(True)
         self.r_motor2.reverseOutput(True)
         self.r_motor3.reverseOutput(True)
