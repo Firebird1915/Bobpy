@@ -15,3 +15,6 @@ class PullIntake(Command):
 		'''Called Repeatedly when scheduled to run'''
 
 		self.intake.takeball()
+
+	def isFinished(self):
+		self.end()

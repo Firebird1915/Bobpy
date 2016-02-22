@@ -8,6 +8,7 @@ from oi import OI
 
 from subsystems.drivetrain import DriveTrain
 from subsystems.pneumatics_comp import Pneumatics
+from subsystems.intake import Intake
 
 class Bob(wpilib.IterativeRobot):
 
@@ -21,6 +22,7 @@ class Bob(wpilib.IterativeRobot):
         """
         self.drivetrain = DriveTrain(self)
         self.pneumatics_comp = Pneumatics(self)
+        self.intake = Intake(self)
         self.oi = OI(self)
         self.sd = NetworkTable.getTable("SmartDashboard")
 
