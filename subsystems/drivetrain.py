@@ -17,18 +17,30 @@ class DriveTrain(Subsystem):
         self.l_motor2 = wpilib.CANTalon(2)
         self.l_motor3 = wpilib.CANTalon(3)
 
+
+        #reverse these please!
         self.l_motor1.reverseOutput(True)
         self.l_motor2.reverseOutput(True)
         self.l_motor3.reverseOutput(True)
+
+        #Don't pop off when we we want to move
+        self.l_motor1.setVoltageRampRate(24/0.6)
+        self.l_motor2.setVoltageRampRate(24/0.6)
+        self.l_motor3.setVoltageRampRate(24/0.6)
+
 
         #right gearbox Talon
         self.r_motor1 = wpilib.CANTalon(4)
         self.r_motor2 = wpilib.CANTalon(5)
         self.r_motor3 = wpilib.CANTalon(6)
-        
+
         self.r_motor1.reverseOutput(True)
         self.r_motor2.reverseOutput(True)
         self.r_motor3.reverseOutput(True)
+
+        self.r_motor1.setVoltageRampRate(24/0.6)
+        self.r_motor2.setVoltageRampRate(24/0.6)
+        self.r_motor3.setVoltageRampRate(24/0.6)
 
         # #Compressor starts from the drivetrain but this all might change
         # if self.robot.isReal():

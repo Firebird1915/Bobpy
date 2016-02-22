@@ -12,6 +12,7 @@ class LiftMech(Subsystem):
 
 		self.armMotor = wpilib.CANTalon(12)
 
+		self.armMotor.setVoltageRampRate(24.0/0.9)
 		self.sd = wpilib.SmartDashboard
 
 	def initDefaultCommand(self):
