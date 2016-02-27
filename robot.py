@@ -28,6 +28,11 @@ class Bob(wpilib.IterativeRobot):
         self.oi = OI(self)
         self.sd = NetworkTable.getTable("SmartDashboard")
 
+        self.drivetrain.drive.setExpiration(0.2)
+        self.drivetrain.drive2.setExpiration(0.2)
+        self.drivetrain.drive.setSafetyEnabled(True)
+        self.drivetrain.drive2.setSafetyEnabled(True)
+
 
         
     def autonomousInit(self): #has nothing so far probably wont who knows
@@ -37,6 +42,8 @@ class Bob(wpilib.IterativeRobot):
     def autonomousPeriodic(self):
         """This function is called periodically during autonomous."""
 
+        self.drivetrain.drive.setSafetyEnabled(False)
+        self.drivetrain.drive2.setSafetyEnabled(False)
         if self.auto_loop_counter < 100:
             self.drivetrain.drive.tankDrive(-0.5, -0.5) #drive forward
             self.drivetrain.drive2.tankDrive(-0.5, -0.5)
@@ -44,7 +51,8 @@ class Bob(wpilib.IterativeRobot):
         else:
             self.drivetrain.drive.tankDrive(0,0)
             self.drivetrain.drive2.tankDrive(0,0)
-        
+        	self.drivetrain.drive.setSafetyEnabled(True)
+        	self.drivetrain.drive2.setSafetyEnabled(True)
 
     def teleopPeriodic(self):
         """This function is called periodically during operator control."""
