@@ -51,8 +51,8 @@ class Bob(wpilib.IterativeRobot):
         else:
             self.drivetrain.drive.tankDrive(0,0)
             self.drivetrain.drive2.tankDrive(0,0)
-        	self.drivetrain.drive.setSafetyEnabled(True)
-        	self.drivetrain.drive2.setSafetyEnabled(True)
+            self.drivetrain.drive.setSafetyEnabled(True)
+            self.drivetrain.drive2.setSafetyEnabled(True)
 
     def teleopPeriodic(self):
         """This function is called periodically during operator control."""
