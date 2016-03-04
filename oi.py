@@ -25,22 +25,18 @@ class OI:
 
 
 		#Buttons for Xbox controller
-		self.r_trig = JoystickButton(self.joy, 6) #I am confident
+		self.r_trig = JoystickButton(self.joy, 6) #I think 
 
 		#buttons for actual joystick
-
 		self.btn3 = JoystickButton(self.joy_lift, 3)
-		self.btn4 = JoystickButton(self.joy_lift, 4)
-
-		self.btn7 = JoystickButton(self.joy_lift, 7)
-		self.btn8 = JoystickButton(self.joy_lift, 8)
+		#self.btn4 = JoystickButton(self.joy_lift, 4)
 
 		#bind buttons on Xbox controller to commands
 		self.r_trig.toggleWhenPressed(SpeedToggle(robot.pneumatics_comp))
 
 
 		#bind buttons on Joystick to commands
-		self.btn7.whenPressed()
+		self.btn3.whileHeld(PullIntake(robot.intake))
 		#self.btn3.whenPressed(PullIntake(Intake))
 
 	def getJoystick(self):

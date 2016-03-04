@@ -10,6 +10,7 @@ from subsystems.drivetrain import DriveTrain
 from subsystems.pneumatics_comp import Pneumatics
 from subsystems.intake import Intake
 from subsystems.lift import LiftMech
+from subsystems.camera import Camera
 
 class Bob(wpilib.IterativeRobot):
 
@@ -27,6 +28,7 @@ class Bob(wpilib.IterativeRobot):
         self.lift = LiftMech(self)
         self.oi = OI(self)
         self.sd = NetworkTable.getTable("SmartDashboard")
+        self.camera = Camera(self)
 
         self.drivetrain.drive.setExpiration(0.2)
         self.drivetrain.drive2.setExpiration(0.2)
