@@ -1,23 +1,23 @@
-# from wpilib.command import Command
+from wpilib.command import Command
+from subsystems.lift import LiftMech
 
-# class armUp(Command):
-# 	"""
-# 		Command for rasing the arm some position
-# 	 """
-# 	def __init__(self, robot):
-# 		super().__init__()
-# 		self.robot = robot
-# 		self.requires(self.robot.lfit)
+class armUp(Command):
+    """
+        Command for rasing the arm some position
+     """
+    def __init__(self, lift):
+        super().__init__()
+        self.lift = lift
+        self.requires(lift)
 
-# 	def initalize(self):
-# 		pass
+    def initalize(self):
+        '''Called just before this Command runs the first time'''
 
-# 	def execute(self):
-# 		pass
+    def execute(self):  
+        self.lift.Moveup()
 
-# 	def isFinished(self):
-# 		pass
+    def isFinished(self):
+        self.isTimedOut()
 
-# 	def end(self):
-# 		pass 
-# 		
+
+        
