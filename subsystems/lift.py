@@ -14,7 +14,7 @@ class LiftMech(Subsystem):
 
         self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.Position)
 
-        self.armMotor.setFeedbackDevice(wpilib.CANTalon.FeedbackDevice.QuadEncoder)
+        self.armMotor.setFeedbackDevice(wpilib.CANTalon.FeedbackDevice.AnalogPot)
 
         self.armMotor.setPID(0.5,0.0,0.0)
 
@@ -38,12 +38,16 @@ class LiftMech(Subsystem):
 
     def moveref(self, joy_lift):
         if joy_lift.getRawAxis(1) == 1:
-            self.armMotor.set(joy_lift.getRawAxis(1))
+            self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.PercentVbus)
+            self.armMotor.set(joy_lift.getRawAxis(1)*0.4)
         elif joy_lift.getRawAxis(1) == -1:
-            self.armMotor.set(joy_lift.getRawAxis(1))
+            self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.PercentVbus)
+            self.armMotor.set(joy_lift.getRawAxis(1)*0.4)
         else:
+            self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.PercentVbus)
             self.armMotor.set(0)
 
 
     def log(self):
         self.sd.putDouble("Arm Distance", self.armMotor.getEncPosition())
+        self.sd.putDouble("Arm Analog", self.armMotor.getAnalogInVelocity())
