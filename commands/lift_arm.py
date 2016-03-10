@@ -8,6 +8,7 @@ class MoveArm(Command):
         super().__init__()
         self.robot = robot
         self.requires(self.robot.lift)
+        self.setTimeout(1.0)
     
     def initialize(self):
         '''Called just before this Command runs the first time'''

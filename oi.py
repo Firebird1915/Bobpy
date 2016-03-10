@@ -11,6 +11,7 @@ from subsystems.pneumatics_comp import Pneumatics
 from commands.speed_toggle import SpeedToggle
 from commands.pull_intake import PullIntake
 from commands.lift_arm import MoveArm
+from commands.armup import armUp
 
 class OI:
 
@@ -30,13 +31,15 @@ class OI:
 		#buttons for actual joystick
 		self.btn3 = JoystickButton(self.joy_lift, 3)
 		#self.btn4 = JoystickButton(self.joy_lift, 4)
+		self.btn7 = JoystickButton(self.joy_lift, 7)
 
 		#bind buttons on Xbox controller to commands
 		self.r_trig.toggleWhenPressed(SpeedToggle(robot.pneumatics_comp))
 
 
 		#bind buttons on Joystick to commands
-		self.btn3.whileHeld(PullIntake(robot.intake))
+		# self.btn3.whileHeld(PullIntake(robot.intake))
+		self.btn7.whenPressed(armUp(robot.lift))
 		#self.btn3.whenPressed(PullIntake(Intake))
 
 	def getJoystick(self):
