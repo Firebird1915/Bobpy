@@ -70,7 +70,8 @@ class Bob(wpilib.IterativeRobot):
     def log(self):
         self.drivetrain.log()
         self.lift.log()
-        self.sd.putNumber('someNumber', 1234) #checks to see if dashboard is working
+        self.intake.log()
+        self.sd.getBoolean('right trigger', self.oi.btn2.get())
         #self.sd.getBoolean('Right trigger?',self.r_trig.get())
 
 
