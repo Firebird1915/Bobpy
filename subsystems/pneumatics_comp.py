@@ -13,7 +13,7 @@ class Pneumatics(Subsystem):
             self.compressor = wpilib.Compressor()
             self.compressor.start()
         
-        self.piston = wpilib.DoubleSolenoid(2,3)
+        self.piston = wpilib.DoubleSolenoid(4,5)
 
         self.switcher = wpilib.DoubleSolenoid(0,1)
         self.shifter = False   
@@ -33,6 +33,7 @@ class Pneumatics(Subsystem):
         return self.shifter
 
     def shootball(self):
-        self.piston.set(3)
-        wpilib.Wait(0.2)
+        self.piston.set(1)
+        
+    def pullpistion(self):
         self.piston.set(2)

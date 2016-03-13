@@ -14,8 +14,8 @@ class TakeInBall(Command):
 
     def execute(self):
         ''' Called repeatedly when the command is scheduled to run '''
-        takeball()
-        return self.setTimeout(0)
+        self.intake.takeball()
+        return self.setTimeout(0.3)
 
     def isFinished(self):
         return self.isTimedOut()

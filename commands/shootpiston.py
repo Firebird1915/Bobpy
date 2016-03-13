@@ -12,15 +12,16 @@ class shoot_piston(Command):
         self.setInterruptible(False)
         self.pneumatics_comp = pneumatics_comp
         self.requires(pneumatics_comp)
-        self.setTimeout(1.0)
+        self.setTimeout(1)
 
     def initialize(self):
         '''called before the command runs for the first time'''
 
     def execute(self):
         ''' Called repeatedly when the command is scheduled to run '''
-        shootball()
-        return self.setTimeout(0)
+        self.pneumatics_comp.shootball()
+        self.pneumatics_comp.pullpistion()
+        return self.setTimeout(0.9)
 
     def isFinished(self):
         return self.isTimedOut()

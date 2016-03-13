@@ -44,9 +44,12 @@ class OI:
 
 
 		#bind buttons on Joystick to commands
-		# self.btn3.whileHeld(PullIntake(robot.intake))
 		self.btn7.whenPressed(armUp(robot.lift))
+
+
 		self.btn1.whenPressed(shoot_piston(robot.pneumatics_comp))
+		
+		#intake related commands 
 		self.btn5.whenPressed(WindMeUp(robot.intake))
 		self.btn3.whileHeld(TakeInBall(robot.intake))
 		self.btn4.whileHeld(PushOutBall(robot.intake))

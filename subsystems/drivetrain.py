@@ -24,9 +24,9 @@ class DriveTrain(Subsystem):
         self.l_motor3.reverseOutput(True)
 
         #Don't pop off when we we want to move
-        self.l_motor1.setVoltageRampRate(24/0.6)
-        self.l_motor2.setVoltageRampRate(24/0.6)
-        self.l_motor3.setVoltageRampRate(24/0.6)
+        self.l_motor1.setVoltageRampRate(24/0.8)
+        self.l_motor2.setVoltageRampRate(24/0.8)
+        self.l_motor3.setVoltageRampRate(24/0.8)
 
 
         #right gearbox Talon
@@ -38,9 +38,9 @@ class DriveTrain(Subsystem):
         self.r_motor2.reverseOutput(True)
         self.r_motor3.reverseOutput(True)
 
-        self.r_motor1.setVoltageRampRate(24/0.6)
-        self.r_motor2.setVoltageRampRate(24/0.6)
-        self.r_motor3.setVoltageRampRate(24/0.6)
+        self.r_motor1.setVoltageRampRate(24/0.8)
+        self.r_motor2.setVoltageRampRate(24/0.8)
+        self.r_motor3.setVoltageRampRate(24/0.8)
 
         # #Compressor starts from the drivetrain but this all might change
         # if self.robot.isReal():
@@ -84,8 +84,8 @@ class DriveTrain(Subsystem):
 
     def driveJoystick(self, joy):
         ''' using a controller to drive tank style '''
-        self.drive.tankDrive(joy.getRawAxis(1)/1.2, joy.getRawAxis(5)/1.2)
-        self.drive2.tankDrive(joy.getRawAxis(1)/1.2,joy.getRawAxis(5)/1.2) #these have to be the same as self.drive or you might break the gearboxes
+        self.drive.tankDrive(joy.getRawAxis(1)/1.2, joy.getRawAxis(3)/1.2)
+        self.drive2.tankDrive(joy.getRawAxis(1)/1.2,joy.getRawAxis(3)/1.2) #these have to be the same as self.drive or you might break the gearboxes
     
     # #turbo mode
     # def shiftFast(self):

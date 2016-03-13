@@ -28,25 +28,28 @@ class Bob(wpilib.IterativeRobot):
         self.oi = OI(self)
         self.sd = NetworkTable.getTable("SmartDashboard")
 
+        self.timer = wpilib.Timer()
+        self.timer
+
         self.drivetrain.drive.setExpiration(0.1)
         self.drivetrain.drive2.setExpiration(0.1)
         self.drivetrain.drive.setSafetyEnabled(True)
         self.drivetrain.drive2.setSafetyEnabled(True)
 
 
+
         
     def autonomousInit(self): #has nothing so far probably wont who knows
-
-        self.auto_loop_counter = 0 #teaches the roboto how to count
+        self.auto_loop_counter = 0
 
     def autonomousPeriodic(self):
         """This function is called periodically during autonomous."""
 
         self.drivetrain.drive.setSafetyEnabled(False)
         self.drivetrain.drive2.setSafetyEnabled(False)
-        if self.auto_loop_counter < 100:
-            self.drivetrain.drive.tankDrive(-0.5, -0.5) #drive forward
-            self.drivetrain.drive2.tankDrive(-0.5, -0.5)
+        if self.auto_loop_counter < 240:
+            self.drivetrain.drive.tankDrive(-0.8, -0.8) #drive forward
+            self.drivetrain.drive2.tankDrive(-0.8, -0.8)
             self.auto_loop_counter += 1
         else:
             self.drivetrain.drive.tankDrive(0,0)

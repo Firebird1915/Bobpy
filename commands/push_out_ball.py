@@ -14,7 +14,7 @@ class PushOutBall(Command):
 
     def execute(self):
         ''' Called repeatedly when the command is scheduled to run '''
-        loseball()
+        self.intake.loseball()
         return self.setTimeout(0)
 
     def isFinished(self):

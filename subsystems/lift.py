@@ -29,22 +29,22 @@ class LiftMech(Subsystem):
             This in theory will lift the arm to the top of the robot
         '''
         self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.Position)
-        self.armMotor.setPosition(-2999)
+        self.armMotor.setPosition(-2000)
 
     def moveDown(self):
        self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.Position)
-       self.armMotor.setPosition(4999)
+       self.armMotor.setPosition(4100)
 
     def stopmovement(self):
         self.armMotor.set(0)
 
 
     def limitPOS(self):
-        if self.armMotor.getEncPosition() <= -3000:
+        if self.armMotor.getEncPosition() <= -2729.00: #421.000
             self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.PercentVbus)
             self.armMotor.set(0)
             return True
-        elif self.armMotor.getEncPosition() >= 5000:
+        elif self.armMotor.getEncPosition() >= 4999:
             self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.PercentVbus)            
             self.armMotor.set(0)
             return True
@@ -52,9 +52,9 @@ class LiftMech(Subsystem):
             return False
 
     def limitme(self):
-        if self.limitPOS() == True and self.armMotor.getEncPosition() <= -3000:
+        if self.limitPOS() == True and self.armMotor.getEncPosition() <= -2729.00:
             self.Moveup()
-        elif self.limitPOS() == True and self.armMotor.getEncPosition() >= 5000:
+        elif self.limitPOS() == True and self.armMotor.getEncPosition() >= 4999:
             self.moveDown()
 
     def moveref(self, joy_lift):
@@ -66,11 +66,12 @@ class LiftMech(Subsystem):
             self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.PercentVbus)
             self.armMotor.set(joy_lift.getRawAxis(1)*0.4)
         else:
-            self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.PercentVbus)
-            self.armMotor.set(0)
+            self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.Voltage)
+            self.armMotor.set(0.200)
             self.limitme()
 
 
     def log(self):
+        self.sd.putDouble("Arm Voltage", self.armMotor.getOutputVoltage())
         self.sd.putDouble("Arm Distance", self.armMotor.getEncPosition())
-        self.sd.putDouble("Arm Analog", self.armMotor.get())
+        self.sd.putDouble("Arm Current", self.armMotor.getOutputCurrent())
