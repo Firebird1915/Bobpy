@@ -12,7 +12,6 @@ class shoot_piston(Command):
         self.setInterruptible(False)
         self.pneumatics_comp = pneumatics_comp
         self.requires(pneumatics_comp)
-        self.setTimeout(1)
 
     def initialize(self):
         '''called before the command runs for the first time'''

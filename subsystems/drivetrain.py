@@ -41,18 +41,9 @@ class DriveTrain(Subsystem):
         self.r_motor1.setVoltageRampRate(24/0.8)
         self.r_motor2.setVoltageRampRate(24/0.8)
         self.r_motor3.setVoltageRampRate(24/0.8)
-
-        # #Compressor starts from the drivetrain but this all might change
-        # if self.robot.isReal():
-        #     self.compressor = wpilib.Compressor()
-        #     self.compressor.start()
         
-        # self.switcher = wpilib.DoubleSolenoid(0,1)
-        # self.shifter = False            
+        self.photo = wpilib.DigitalInput(1)   
 
-        #Encoder talons from testbed
-        #self.motor1 = wpilib.CANTalon(8) #initialize the motor as a Talon on channel 1
-        #self.motor2 = wpilib.CANTalon(2)
 
         '''This is set to the first two sets of gearbox motors for each side'''
         self.drive = wpilib.RobotDrive(self.l_motor1, # Tells the robot to call the tank drive method
@@ -64,7 +55,7 @@ class DriveTrain(Subsystem):
         self.drive2= wpilib.RobotDrive(self.l_motor3,self.r_motor3)
 
 
-        self.motor_encoder = wpilib.Encoder(0,1) # position of these two motors
+        #self.motor_encoder = wpilib.Encoder(0,1) # position of these two motors
 
         #block for eventual test simulation
         self.sd = wpilib.SmartDashboard
@@ -87,19 +78,7 @@ class DriveTrain(Subsystem):
         self.drive.tankDrive(joy.getRawAxis(1)/1.2, joy.getRawAxis(3)/1.2)
         self.drive2.tankDrive(joy.getRawAxis(1)/1.2,joy.getRawAxis(3)/1.2) #these have to be the same as self.drive or you might break the gearboxes
     
-    # #turbo mode
-    # def shiftFast(self):
-    #     self.switcher.set(1)
-    #     self.shifter = True
 
-    # #cruise mode
-    # def shiftReturn(self):
-    #     self.switcher.set(0)
-    #     self.shifter = False
-
-    # #did we change speeds?
-    # def is_shifted(self):
-    #     return self.shifter
 
     def reset(self):
         ''' reset the encoders '''
@@ -108,4 +87,4 @@ class DriveTrain(Subsystem):
     def log(self):
         # self.sd.putDouble("Encoder Distance", self.motor1.getEncPosition())
         # self.sd.putDouble("Big Encoder", self.motor1.getEncPosition()*2)
-        pass            
+        self.sd.putBoolean("Photosensor status", self.photo.get())
