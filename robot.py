@@ -71,6 +71,11 @@ class Bob(wpilib.IterativeRobot):
         #     self.drivetrain.drive2.setSafetyEnabled(True)
         Scheduler.getInstance().run()
         self.log()
+
+    def teleopInit(self):
+        if self.autoCommand is not None:
+            self.autoCommand.cancel()
+            
     def teleopPeriodic(self):
         """This function is called periodically during operator control."""
         #cancel out autonomous

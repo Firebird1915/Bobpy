@@ -2,7 +2,9 @@ from wpilib.command import Command
 
 class driveforward_static(Command):
     """
-        robot will jump the static obstacle in autonomous
+        robot will attemp to jump the static obstacle in autonomous
+            - It is pretty consistant with category B & D defenses
+
     """
     def __init__(self, robot):
         super().__init__()
@@ -30,7 +32,8 @@ class driveforward_static(Command):
         self.robot.auto_loop_counter == 240
 
     def end(self):
-        self.robot.drivetrain.stop()
+        self.robot.drivetrain.drive.tankDrive(0,0)
+        self.robot.drivetrain.drive2.tankDrive(0,0)
 
     def interrupted(self):
         self.end()
