@@ -7,6 +7,7 @@ import logging
 from oi import OI
 
 from commands.autos.drive_forward_static import driveforward_static
+from commands.autos.drive_forward_underpass import driveforward_underpass
 
 from subsystems.drivetrain import DriveTrain
 from subsystems.pneumatics_comp import Pneumatics
@@ -40,7 +41,7 @@ class Bob(wpilib.IterativeRobot):
 
         self.autochooser = wpilib.SendableChooser()
         self.autochooser.addObject('DUKEBOYS',driveforward_static(self))
-        self.autochooser.addObject('Underpass','2')
+        self.autochooser.addObject('Underpass',driveforward_underpass(self))
         self.autochooser.addObject('Cheval de Frise (beta)','3')
         self.autochooser.addDefault('DUKEBOYS',driveforward_static(self))
         wpilib.SmartDashboard.putData("Autonomous Mode", self.autochooser)
@@ -75,7 +76,7 @@ class Bob(wpilib.IterativeRobot):
     def teleopInit(self):
         if self.autoCommand is not None:
             self.autoCommand.cancel()
-            
+
     def teleopPeriodic(self):
         """This function is called periodically during operator control."""
         #cancel out autonomous

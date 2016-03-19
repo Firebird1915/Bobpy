@@ -42,7 +42,7 @@ class DriveTrain(Subsystem):
         self.r_motor2.setVoltageRampRate(24/0.8)
         self.r_motor3.setVoltageRampRate(24/0.8)
         
-        self.photo = wpilib.DigitalInput(1)   
+        self.photo = wpilib.DigitalInput(1)
 
 
         '''This is set to the first two sets of gearbox motors for each side'''
@@ -77,6 +77,8 @@ class DriveTrain(Subsystem):
         ''' using a controller to drive tank style '''
         self.drive.tankDrive(joy.getRawAxis(1)/1.2, joy.getRawAxis(3)/1.2)
         self.drive2.tankDrive(joy.getRawAxis(1)/1.2,joy.getRawAxis(3)/1.2) #these have to be the same as self.drive or you might break the gearboxes
+
+
     
 
 

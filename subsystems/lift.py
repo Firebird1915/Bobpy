@@ -21,6 +21,8 @@ class LiftMech(Subsystem):
         self.armMotor.setVoltageRampRate(24.0/0.9)
         self.sd = wpilib.SmartDashboard
 
+        self.limitsiwtch = wpilib.DigitalInput(0)
+
     def initDefaultCommand(self):
         self.setDefaultCommand(MoveArm(self.robot))
 
@@ -59,15 +61,21 @@ class LiftMech(Subsystem):
 
     def moveref(self, joy_lift):
 
-        if joy_lift.getRawAxis(1) == 1 and self.limitPOS() == False:
-            self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.PercentVbus)
-            self.armMotor.set(joy_lift.getRawAxis(1)*0.4) 
-        elif joy_lift.getRawAxis(1) == -1 and self.limitPOS() == False:
+        if joy_lift.getRawAxis(1) == -1 and self.limitsiwtch.get() == True:
             self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.PercentVbus)
             self.armMotor.set(joy_lift.getRawAxis(1)*0.4)
+        elif joy_lift.getRawAxis(1) == 1 and self.limitsiwtch.get() == True:
+            self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.PercentVbus)
+            self.armMotor.set(joy_lift.getRawAxis(1)*0.4)
+        elif joy_lift.getRawAxis(1) == 1 and self.limitsiwtch.get() == False:
+            self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.PercentVbus)
+            self.armMotor.set(0)
+        elif joy_lift.getRawAxis(1) == -1  and self.limitsiwtch.get() == False:
+            self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.PercentVbus)
+            self.armMotor.set(joy_lift.getRawAxis(1)*0.4) 
         else:
             self.armMotor.changeControlMode(wpilib.CANTalon.ControlMode.Voltage)
-            self.armMotor.set(0.200)
+            self.armMotor.set(-0.300)
             self.limitme()
 
 
@@ -75,3 +83,4 @@ class LiftMech(Subsystem):
         self.sd.putDouble("Arm Voltage", self.armMotor.getOutputVoltage())
         self.sd.putDouble("Arm Distance", self.armMotor.getEncPosition())
         self.sd.putDouble("Arm Current", self.armMotor.getOutputCurrent())
+        self.sd.putBoolean("limitsiwtch", self.limitsiwtch.get())
