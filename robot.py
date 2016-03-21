@@ -8,6 +8,7 @@ from oi import OI
 
 from commands.autos.drive_forward_static import driveforward_static
 from commands.autos.drive_forward_underpass import driveforward_underpass
+from commands.autos.drive_cheval import drive_Cheval
 
 from subsystems.drivetrain import DriveTrain
 from subsystems.pneumatics_comp import Pneumatics
@@ -42,7 +43,7 @@ class Bob(wpilib.IterativeRobot):
         self.autochooser = wpilib.SendableChooser()
         self.autochooser.addObject('DUKEBOYS',driveforward_static(self))
         self.autochooser.addObject('Underpass',driveforward_underpass(self))
-        self.autochooser.addObject('Cheval de Frise (beta)','3')
+        self.autochooser.addObject('Cheval de Frise (beta)',drive_Cheval(self))
         self.autochooser.addDefault('DUKEBOYS',driveforward_static(self))
         wpilib.SmartDashboard.putData("Autonomous Mode", self.autochooser)
 
@@ -50,7 +51,7 @@ class Bob(wpilib.IterativeRobot):
 
 
 
-        
+
     def autonomousInit(self): #has nothing so far probably wont who knows
         # self.auto_loop_counter = 0
         self.autoCommand = self.autochooser.getSelected()
@@ -84,7 +85,7 @@ class Bob(wpilib.IterativeRobot):
 
             Scheduler.getInstance().run()
             self.log()
-        
+
 
     def testPeriodic(self):
         """This function is called periodically during test mode."""
@@ -93,7 +94,6 @@ class Bob(wpilib.IterativeRobot):
     def log(self):
         self.drivetrain.log()
         self.lift.log()
-        self.intake.log()
         self.sd.getBoolean('right trigger', self.oi.btn2.get())
         #self.sd.getBoolean('Right trigger?',self.r_trig.get())
 
