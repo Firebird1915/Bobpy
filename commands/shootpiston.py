@@ -1,5 +1,6 @@
 import wpilib
 from wpilib.command import Command
+from wpilib.command import WaitCommand
 from subsystems.pneumatics_comp import Pneumatics
 
 class shoot_piston(Command):
@@ -19,8 +20,8 @@ class shoot_piston(Command):
     def execute(self):
         ''' Called repeatedly when the command is scheduled to run '''
         self.pneumatics_comp.shootball()
+        WaitCommand(0.5)
         self.pneumatics_comp.pullpistion()
-        return self.setTimeout(0.9)
 
     def isFinished(self):
         return self.isTimedOut()

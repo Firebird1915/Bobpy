@@ -18,7 +18,7 @@ class drive_Cheval(CommandGroup):
         super().__init__()
         self.robot = robot
 
-        addSequential(MoveOffLight(robot))
-        addSequential(armDown(robot))
-        addParallel(armUp(robot))
-        addSequential(driveforward_half(robot))
+        self.addSequential(MoveOffLight(robot))
+        self.addSequential(armDown(robot))
+        self.addParallel(armUp(robot))
+        self.addSequential(driveforward_half(robot))
