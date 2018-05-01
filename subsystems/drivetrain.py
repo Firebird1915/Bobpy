@@ -12,24 +12,24 @@ class DriveTrain(Subsystem):
         super().__init__()
         self.robot = robot
         
-        # left gearbox Talons
+        # Initialize gearbox Talons
         self.l_motor1 = wpilib.CANTalon(1)
         self.l_motor2 = wpilib.CANTalon(2)
         self.l_motor3 = wpilib.CANTalon(3)
 
 
-        #reverse these please!
+        # Reverse our motors
         self.l_motor1.reverseOutput(True)
         self.l_motor2.reverseOutput(True)
         self.l_motor3.reverseOutput(True)
 
-        #Don't pop off when we we want to move
+        # Slow ramp up to full speed.
         self.l_motor1.setVoltageRampRate(24/0.6)
         self.l_motor2.setVoltageRampRate(24/0.6)
         self.l_motor3.setVoltageRampRate(24/0.6)
 
 
-        #right gearbox Talon
+        # Right gearbox Talon
         self.r_motor1 = wpilib.CANTalon(4)
         self.r_motor2 = wpilib.CANTalon(5)
         self.r_motor3 = wpilib.CANTalon(6)
@@ -66,7 +66,7 @@ class DriveTrain(Subsystem):
 
         self.motor_encoder = wpilib.Encoder(0,1) # position of these two motors
 
-        #block for eventual test simulation
+        # Block for eventual test simulation
         self.sd = wpilib.SmartDashboard
 
     def initDefaultCommand(self):
